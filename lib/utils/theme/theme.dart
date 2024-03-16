@@ -4,6 +4,8 @@ import 'package:wayfinder/utils/theme/custom_themes/bottom_sheet_theme.dart';
 import 'package:wayfinder/utils/theme/custom_themes/checkbox_theme.dart';
 import 'package:wayfinder/utils/theme/custom_themes/chip_theme.dart';
 import 'package:wayfinder/utils/theme/custom_themes/elevated_button_theme.dart';
+import 'package:wayfinder/utils/theme/custom_themes/outline_button_theme.dart';
+import 'package:wayfinder/utils/theme/custom_themes/text_field_theme.dart';
 import 'package:wayfinder/utils/theme/custom_themes/text_theme.dart';
 
 class TAppTheme {
@@ -29,13 +31,15 @@ class TAppTheme {
       //again putting everything here would make the code messy so create a separate class for this
     */
     textTheme: TTextTheme.lightTextTheme,
-    elevatedButtonTheme: TElevatedButtonTheme.lightElevatedButtonTheme,
-    appBarTheme: TAppBarTheme.lightAppBarTheme,
-    bottomSheetTheme: TBottomSheetTheme.lightBottomSheetTheme,
-    checkboxTheme: TCheckboxTheme.lightCheckboxTheme,
     chipTheme: TChipTheme.lightChipTheme,
-
+    appBarTheme: TAppBarTheme.lightAppBarTheme,
+    checkboxTheme: TCheckboxTheme.lightCheckboxTheme,
+    bottomSheetTheme: TBottomSheetTheme.lightBottomSheetTheme,
+    elevatedButtonTheme: TElevatedButtonTheme.lightElevatedButtonTheme,
+    outlinedButtonTheme: TOutlineButtonTheme.lightOutlineButtonTheme,
+    inputDecorationTheme: TTextFormFieldTheme.lightInputDecorationTheme,
   );
+
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     fontFamily: 'Poppins',
@@ -48,5 +52,7 @@ class TAppTheme {
     bottomSheetTheme: TBottomSheetTheme.darkBottomSheetTheme,
     checkboxTheme: TCheckboxTheme.darkCheckboxTheme,
     chipTheme: TChipTheme.darkChipTheme,
+    outlinedButtonTheme: TOutlineButtonTheme.darkOutlineButtonTheme,
+    inputDecorationTheme: TTextFormFieldTheme.darkInputDecorationTheme,
   );
 }
