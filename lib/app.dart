@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "package:get/get_navigation/get_navigation.dart";
-import "package:wayfinder/features/auth/screens.onboarding/onboarding.dart";
+import 'package:wayfinder/features/auth/screens/onboarding/onboarding.dart';
 import "package:wayfinder/utils/theme/theme.dart";
 
 class App extends StatelessWidget {

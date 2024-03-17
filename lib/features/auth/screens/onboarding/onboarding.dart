@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:wayfinder/features/auth/controllers.onboarding/onboarding_controller.dart';
-import 'package:wayfinder/features/auth/screens.onboarding/widgets/onboarding_dot_navigation.dart';
-import 'package:wayfinder/features/auth/screens.onboarding/widgets/onboarding_next_button.dart';
-import 'package:wayfinder/features/auth/screens.onboarding/widgets/onboarding_skip.dart';
+import 'package:wayfinder/features/auth/controllers/onboarding/onboarding_controller.dart';
+import 'package:wayfinder/features/auth/screens/onboarding/widgets/onboarding_dot_navigation.dart';
+import 'package:wayfinder/features/auth/screens/onboarding/widgets/onboarding_next_button.dart';
+import 'package:wayfinder/features/auth/screens/onboarding/widgets/onboarding_skip.dart';
 import 'package:wayfinder/utils/constant/colors.dart';
 import 'package:wayfinder/utils/constant/sizes.dart';
 import 'package:wayfinder/utils/devices/device_utility.dart';

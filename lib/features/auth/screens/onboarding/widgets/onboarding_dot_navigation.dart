@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:wayfinder/features/auth/controllers.onboarding/onboarding_controller.dart';
-import '../../../../utils/constant/colors.dart';
-import '../../../../utils/constant/sizes.dart';
-import '../../../../utils/devices/device_utility.dart';
-import '../../../../utils/helpers/helper_functions.dart';
+import 'package:wayfinder/features/auth/controllers/onboarding/onboarding_controller.dart';
+import '../../../../../utils/constant/colors.dart';
+import '../../../../../utils/constant/sizes.dart';
+import '../../../../../utils/devices/device_utility.dart';
+import '../../../../../utils/helpers/helper_functions.dart';
+
 
 
 class OnBoardingDotNavigation extends StatelessWidget {
