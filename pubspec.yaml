@@ -54,6 +54,7 @@ flutter:
     - assets/logos/
     - assets/icons/
     - assets/images/onboarding_images/
+    - assets/images/email_verification/
 
   #---------------- LOCAL FONTS ------------------#
   fonts:

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:wayfinder/features/auth/screens/signup/verify_email.dart';
 import 'package:wayfinder/utils/constant/sizes.dart';
 
 import '../../../../utils/constant/colors.dart';
@@ -105,8 +108,7 @@ class CreateForm extends StatelessWidget {
                 child: TextFormField(
                   expands: false,
                   decoration: const InputDecoration(
-                      labelText: "First Name",
-                      prefixIcon: Icon(Iconsax.user)),
+                      labelText: "First Name", prefixIcon: Icon(Iconsax.user)),
                 ),
               ),
               const SizedBox(width: TSizes.spaceBtwInputFields),
@@ -114,8 +116,7 @@ class CreateForm extends StatelessWidget {
                 child: TextFormField(
                   expands: false,
                   decoration: const InputDecoration(
-                      labelText: "Last Name",
-                      prefixIcon: Icon(Iconsax.user)),
+                      labelText: "Last Name", prefixIcon: Icon(Iconsax.user)),
                 ),
               ),
             ],
@@ -126,8 +127,7 @@ class CreateForm extends StatelessWidget {
           TextFormField(
             expands: false,
             decoration: const InputDecoration(
-                labelText: "Username",
-                prefixIcon: Icon(Iconsax.user_edit)),
+                labelText: "Username", prefixIcon: Icon(Iconsax.user_edit)),
           ),
           const SizedBox(height: TSizes.spaceBtwInputFields),
 
@@ -159,7 +159,7 @@ class CreateForm extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () => Get.to(() => const VerifyEmailScreen()),
               child: const Text("Create Account"),
             ),
           ),
