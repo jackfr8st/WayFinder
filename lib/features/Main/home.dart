@@ -13,7 +13,7 @@ class Home extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 50),
-              Text("This the map screen",
+              Text("Hello, Ojas",
                   style: Theme.of(context).textTheme.headlineMedium,
                   textAlign: TextAlign.center),
 
