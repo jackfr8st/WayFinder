@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "870179786007",
+    "project_id": "wayfinder-b13f3",
+    "storage_bucket": "wayfinder-b13f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870179786007:android:9e63af1081e6dca7a1fb52",
+        "android_client_info": {
+          "package_name": "com.example.wayfinder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870179786007-ctk3eo0kdg3rtppq2c30dnkl4ih7fvdv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wayfinder",
+            "certificate_hash": "a08188bcec1d52af1f2b0b776f340241e1d55987"
+          }
+        },
+        {
+          "client_id": "870179786007-l8tjpg1g1vkbjbq2hknkmio0dria6cug.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCumXo9FiVarAYWLmbmDo2plLLL8A14KTo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870179786007-l8tjpg1g1vkbjbq2hknkmio0dria6cug.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "870179786007-o512g3n9cugvmkvj1elp8qsr80f61uhv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.wayfinder"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

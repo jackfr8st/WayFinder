@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:wayfinder/common/styles/spacing_styles.dart';
+import 'package:wayfinder/features/Main/home.dart';
 import 'package:wayfinder/features/auth/screens/signup/signup.dart';
 import 'package:wayfinder/utils/constant/colors.dart';
 import 'package:wayfinder/utils/constant/sizes.dart';
@@ -166,7 +167,7 @@ class TLoginForm extends StatelessWidget {
             SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                    onPressed: () {}, child: const Text("Sign In"))),
+                    onPressed: () => Get.to(() => const Home()), child: const Text("Sign In"))),
             const SizedBox(height: TSizes.spaceBtwItems),
 
             //create acc
