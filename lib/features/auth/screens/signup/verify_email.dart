@@ -1,17 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:wayfinder/data/repositories/auth_repo.dart';
+import 'package:wayfinder/features/auth/controllers/signup/verify_email_controller.dart';
 import 'package:wayfinder/features/auth/screens/login/login.dart';
 import 'package:wayfinder/features/auth/screens/signup/success_screen.dart';
 import 'package:wayfinder/utils/constant/sizes.dart';
 import 'package:wayfinder/utils/helpers/helper_functions.dart';
 
 class VerifyEmailScreen extends StatelessWidget {
-  const VerifyEmailScreen({super.key});
+  const VerifyEmailScreen({super.key, this.email});
+
+  final String? email;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(VerifyEmailController());
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -20,7 +27,7 @@ class VerifyEmailScreen extends StatelessWidget {
           // verfication page it should ideally direct you to the login page cause it means you have alr stored the user data
           // IconButton(onPressed: () => Get.back(), icon: const Icon(CupertinoIcons.clear))
           IconButton(
-              onPressed: () => Get.offAll(() => const LoginScreen()),
+              onPressed: () => AuthenticationRepository.instance.logout(),
               icon: const Icon(CupertinoIcons.clear))
         ],
       ),
@@ -47,14 +54,15 @@ class VerifyEmailScreen extends StatelessWidget {
               SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () => Get.to(() => const SuccessScreen()),
+                    onPressed: () => controller.checkEmailVerificationStatus(),
                     child: const Text("Continue"),
-                  )),
+                  ),
+              ),
               const SizedBox(height: TSizes.spaceBtwItems),
               SizedBox(
                   width: double.infinity,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: ()  => controller.sendEmailVerification(),
                     child: const Text("Resend Email"),
                   )),
             ],

@@ -8,7 +8,14 @@ import '../../../../utils/constant/sizes.dart';
 import '../../../../utils/helpers/helper_functions.dart';
 
 class SuccessScreen extends StatelessWidget {
-  const SuccessScreen({super.key});
+  const SuccessScreen(
+      {super.key,
+      required this.image,
+      required this.title,
+      required this.onPressed});
+
+  final String image, title;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +29,12 @@ class SuccessScreen extends StatelessWidget {
 
               //image
               Image(
-                  image: const AssetImage(
-                      "assets/images/email_verification/sammy-line-success.png"),
+                  image: AssetImage(image),
                   width: THelperFunctions.screenWidth() * 0.8),
               const SizedBox(height: 50),
 
               //title & subtitle
-              Text("Your account was successfully created !",
+              Text(title,
                   style: Theme.of(context).textTheme.headlineMedium,
                   textAlign: TextAlign.center),
               const SizedBox(height: 40),
@@ -37,7 +43,7 @@ class SuccessScreen extends StatelessWidget {
               SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () => Get.to(() => const LoginScreen()),
+                    onPressed: onPressed,
                     child: const Text("Continue"),
                   )),
             ],
