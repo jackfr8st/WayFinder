@@ -3,9 +3,11 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:wayfinder/common/styles/spacing_styles.dart';
 import 'package:wayfinder/features/Main/home.dart';
+import 'package:wayfinder/features/auth/controllers/login/login_controller.dart';
 import 'package:wayfinder/features/auth/screens/signup/signup.dart';
 import 'package:wayfinder/utils/constant/colors.dart';
 import 'package:wayfinder/utils/constant/sizes.dart';
+import 'package:wayfinder/utils/validators/validation.dart';
 // import 'package:wayfinder/utils/helpers/helper_functions.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -120,24 +122,38 @@ class TLoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final controller = Get.put(LoginController());
     return Form(
+      key: controller.loginFormKey,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: TSizes.spaceBtwSections),
         child: Column(
           children: [
             //email
             TextFormField(
+              controller: controller.email,
+              validator: (value) => TValidator.validateEmail(value),
               decoration: const InputDecoration(
                   prefixIcon: Icon(Iconsax.direct_right), labelText: "Email"),
             ),
             const SizedBox(height: TSizes.spaceBtwInputFields),
 
             //password
-            TextFormField(
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Iconsax.password_check),
-                labelText: "Password",
-                suffixIcon: Icon(Iconsax.eye_slash),
+            Obx(
+                  () => TextFormField(
+                controller: controller.password,
+                validator: (value) => TValidator.validatePassword(value),
+                obscureText: controller.hidePassword.value,
+                decoration: InputDecoration(
+                  labelText: "Password",
+                  prefixIcon: const Icon(Iconsax.password_check),
+                  suffixIcon: IconButton(
+                    onPressed: () => controller.hidePassword.value =
+                    !controller.hidePassword.value,
+                    icon:  Icon(controller.hidePassword.value ? Iconsax.eye_slash : Iconsax.eye),
+                  ),
+                ),
               ),
             ),
             const SizedBox(height: TSizes.spaceBtwInputFields / 2),
@@ -167,7 +183,7 @@ class TLoginForm extends StatelessWidget {
             SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                    onPressed: () => Get.to(() => const Home()), child: const Text("Sign In"))),
+                    onPressed: () => controller.emailAndPasswordSignIn(), child: const Text("Sign In"))),
             const SizedBox(height: TSizes.spaceBtwItems),
 
             //create acc

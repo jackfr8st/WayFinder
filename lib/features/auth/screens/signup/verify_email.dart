@@ -2,11 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:wayfinder/data/repositories/auth_repo.dart';
 import 'package:wayfinder/features/auth/controllers/signup/verify_email_controller.dart';
-import 'package:wayfinder/features/auth/screens/login/login.dart';
-import 'package:wayfinder/features/auth/screens/signup/success_screen.dart';
 import 'package:wayfinder/utils/constant/sizes.dart';
 import 'package:wayfinder/utils/helpers/helper_functions.dart';
 
