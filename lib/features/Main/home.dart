@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
     super.initState();
     // Start the timer when the widget is initialized
     locationUpdateTimer =
-        Timer.periodic(const Duration(seconds: 5), (Timer timer) async {
+        Timer.periodic(const Duration(seconds: 10), (Timer timer) async {
       // Update the current position
       Position newPosition = await getCurrentLocation();
       setState(() {
