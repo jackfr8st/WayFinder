@@ -93,23 +93,37 @@ class _HomeState extends State<Home> {
                     child: FlutterMap(
                       mapController: mapController,
                       options: MapOptions(
-                        center: routepoints1[0],
-                        zoom: 17,
+                        initialCenter: routepoints1.isNotEmpty ? routepoints1[0] : currentLocation,
+                        initialZoom: 17,
                       ),
                       children: [
                         TileLayer(
-                          urlTemplate:
-                              'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                           userAgentPackageName: 'com.example.app',
                         ),
                         PolylineLayer(
                           polylineCulling: false,
                           polylines: [
-                            if (routeExists)
                               Polyline(
-                                  points: routepoints1,
-                                  color: Colors.blue,
-                                  strokeWidth: 9),
+                                points: routepoints1,
+                                color: Colors.blue,
+                                strokeWidth: 9,
+                              ),
+                          ],
+                        ),
+                        MarkerLayer(
+                          markers: [
+                            if (routepoints1.isNotEmpty)
+                              Marker(
+                                point: routepoints1.last,
+                                width: 40,
+                                height: 40,
+                                child: const Icon(
+                                  Icons.location_on,
+                                  color: Colors.red,
+                                  size: 36,
+                                ),
+                              ),
                           ],
                         ),
                         CircleLayer(
@@ -154,7 +168,7 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: loadMap,
+                      onPressed: loadMapS,
                       style: ElevatedButton.styleFrom(backgroundColor: TColors.primary),
                       child: const Text("Search"),
                     ),
@@ -185,6 +199,7 @@ class _HomeState extends State<Home> {
     }
 
     setState(() {
+      routepoints1.clear();
       routepoints1 = [];
       var route1 =
           jsonDecode(response1.body)['routes'][0]['geometry']['coordinates'];
@@ -200,5 +215,92 @@ class _HomeState extends State<Home> {
 
     isVisible = true;
     routeExists = true;
+  }
+
+  Future<LatLng> getCoordinatesFromAddress(String address) async {
+    final query = Uri.encodeQueryComponent(address);
+    final url = Uri.parse('https://nominatim.openstreetmap.org/search?q=$query&format=json&polygon=1&addressdetails=1');
+
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data.isEmpty) {
+        throw Exception('No coordinates found for $address');
+      }
+      final lat = double.parse(data[0]['lat']);
+      final lon = double.parse(data[0]['lon']);
+      return LatLng(lat, lon);
+    } else {
+      throw Exception('Failed to fetch coordinates for $address');
+    }
+  }
+
+  Future<List<LatLng>> getRouteFromOSRM(LatLng start, LatLng end) async {
+    final startCoords = '${start.longitude},${start.latitude}';
+    final endCoords = '${end.longitude},${end.latitude}';
+    final url = Uri.parse(
+        'http://router.project-osrm.org/route/v1/driving/$startCoords;$endCoords?steps=true&geometries=polyline&overview=full');
+
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data['code'] == 'Ok') {
+        final route = data['routes'][0]['geometry'];
+        List<LatLng> routePoints = decodePolyline(route);
+        return routePoints;
+      } else {
+        throw Exception('Failed to fetch route from OSRM: ${data['message']}');
+      }
+    } else {
+      throw Exception('Failed to fetch route from OSRM');
+    }
+  }
+
+  List<LatLng> decodePolyline(String encoded) {
+    List<LatLng> poly = [];
+    int index = 0, lat = 0, lng = 0;
+
+    while (index < encoded.length) {
+      int b, shift = 0, result = 0;
+      do {
+        b = encoded.codeUnitAt(index++) - 63;
+        result |= (b & 0x1f) << shift;
+        shift += 5;
+      } while (b >= 0x20);
+      int dlat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+      lat += dlat;
+
+      shift = 0;
+      result = 0;
+      do {
+        b = encoded.codeUnitAt(index++) - 63;
+        result |= (b & 0x1f) << shift;
+        shift += 5;
+      } while (b >= 0x20);
+      int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+      lng += dlng;
+
+      LatLng p = LatLng((lat / 1E5).toDouble(), (lng / 1E5).toDouble());
+      poly.add(p);
+    }
+    return poly;
+  }
+
+  void loadMapS() async {
+    try {
+      final destinationCoords = await getCoordinatesFromAddress(end.text);
+      final route = await getRouteFromOSRM(currentLocation, destinationCoords);
+      setState(() {
+        isVisible = true;
+        routeExists = true;
+        routepoints1 = route;
+      });
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
   }
 }
